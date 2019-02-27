@@ -1,5 +1,7 @@
 package com.arensis.crcr.model;
 
+import java.lang.reflect.Field;
+
 public class RobotStatus {
 	private int leftMotorPower;
 	private int rightMotorPower;
@@ -63,6 +65,22 @@ public class RobotStatus {
 
 	public void setSoundEvent(boolean soundEvent) {
 		this.soundEvent = soundEvent;
+	}
+	
+	@Override
+	public String toString() {
+	  StringBuilder sb = new StringBuilder();
+	  for (Field f : getClass().getDeclaredFields()) {
+	    sb.append(f.getName());
+	    sb.append("=");
+	    try {
+			sb.append(f.get(this));
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	    sb.append(";");
+	  }
+	  return sb.toString();
 	}
 
 }
