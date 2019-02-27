@@ -74,6 +74,7 @@ public class GuiManager {
 		motorsBarChart.getData().addAll(series);
 		
 		motorsBarChart.getStylesheets().add(getClass().getClassLoader().getResource(BAR_CHART_RED_STYLE_PATH).toExternalForm());
+		motorsBarChart.autosize();
 		yAxis.setAnimated(false);
 		xAxis.setAnimated(false);
 

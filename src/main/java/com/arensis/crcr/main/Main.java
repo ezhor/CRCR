@@ -24,11 +24,13 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		RobotStatus currentStatus = communicationManager.getCurrentStatus();
 		guiManager.start(primaryStage);
-		startAsynchronusThread();
+		guiManager.update(currentStatus);
+		startUpdateThread();
 	}
 
-	private void startAsynchronusThread() {
+	private void startUpdateThread() {
 		timer.schedule(new RobotStatusUpdater(), 0, UPDATE_TIME);
 	}
 	
@@ -44,7 +46,6 @@ public class Main extends Application {
 			final RobotStatus robotStatus = inputManager.fetchInputs();
 			guiManager.update(robotStatus);
 			communicationManager.update(robotStatus);
-			System.out.println(robotStatus.toString());
 		}
 		
 	}
