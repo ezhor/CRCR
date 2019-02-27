@@ -59,5 +59,11 @@ void RobotStatus::setHandRotation(unsigned int handRotation) {
 
 std:string toString(){
 	std::stringstream stringStream;
-	stringStream << 
+	stringStream
+		<< "leftMotorPower=" << this->leftMotorPower
+		<< ";rightMotorPower=" << this->rightMotorPower
+		<< ";shoulderRotation=" << this->shoulderRotation
+		<< ";elbowRotation=" << this->elbowRotation
+		<< ";wristRotation=" << this->wristRotation
+		<< ";handRotation=" << this->handRotation
 }
