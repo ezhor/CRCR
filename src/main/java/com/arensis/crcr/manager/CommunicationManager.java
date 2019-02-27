@@ -7,7 +7,7 @@ public class CommunicationManager {
 	public void update(RobotStatus robotStatus) {
 	}
 
-	public RobotStatus getCurrentStatus() {
+	public RobotStatus fetchCurrentStatus() {
 		final RobotStatus robotStatus = new RobotStatus();
 		robotStatus.setLeftMotorPower(72);
 		robotStatus.setRightMotorPower(27);

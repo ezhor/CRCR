@@ -1,6 +1,7 @@
 package com.arensis.crcr.model;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 public class RobotStatus {
 	private int leftMotorPower;
@@ -10,6 +11,33 @@ public class RobotStatus {
 	private int wristRotation;
 	private int handRotation;
 	private boolean soundEvent;
+
+	public RobotStatus() {
+
+	}
+
+	public RobotStatus(String serializedRobotStatus) {
+		final String[] propertiesArray = serializedRobotStatus.split(";");
+		final HashMap<String, Integer> propertiesMap = new HashMap<>();
+		String[] propertyArray;
+
+		for (String propertyString : propertiesArray) {
+			if (propertyString != null && !propertyString.isEmpty()) {
+				propertyArray = propertyString.split("=");
+				propertiesMap.put(propertyArray[0], Integer.parseInt(propertyArray[1]));
+			}
+		}
+
+		for (Field field : getClass().getDeclaredFields()) {
+			if (propertiesMap.get(field.getName()) != null) {
+				try {
+					field.setInt(this, propertiesMap.get(field.getName()));
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	public int getLeftMotorPower() {
 		return leftMotorPower;
@@ -66,21 +94,21 @@ public class RobotStatus {
 	public void setSoundEvent(boolean soundEvent) {
 		this.soundEvent = soundEvent;
 	}
-	
+
 	@Override
 	public String toString() {
-	  StringBuilder sb = new StringBuilder();
-	  for (Field f : getClass().getDeclaredFields()) {
-	    sb.append(f.getName());
-	    sb.append("=");
-	    try {
-			sb.append(f.get(this));
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
+		StringBuilder sb = new StringBuilder();
+		for (Field field : getClass().getDeclaredFields()) {
+			sb.append(field.getName());
+			sb.append("=");
+			try {
+				sb.append(field.get(this));
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			sb.append(";");
 		}
-	    sb.append(";");
-	  }
-	  return sb.toString();
+		return sb.toString();
 	}
 
 }

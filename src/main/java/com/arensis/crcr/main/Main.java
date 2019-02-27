@@ -25,7 +25,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		RobotStatus currentStatus = communicationManager.getCurrentStatus();
+		RobotStatus currentStatus = communicationManager.fetchCurrentStatus();
 		guiManager.start(primaryStage);
 		guiManager.update(currentStatus);
 		inputManager.setRobotStatus(currentStatus);
