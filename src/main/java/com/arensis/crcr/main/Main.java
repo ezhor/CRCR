@@ -29,19 +29,23 @@ public class Main extends Application {
 	}
 
 	private void startAsynchronusThread() {
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				RobotStatus robotStatus = inputManager.fetchInputs();
-				guiManager.update(robotStatus);
-				communicationManager.update(robotStatus);
-				System.out.println(robotStatus.toString());
-			}
-		}, 0, UPDATE_TIME);
+		timer.schedule(new RobotStatusUpdater(), 0, UPDATE_TIME);
 	}
 	
 	@Override
 	public void stop() throws Exception {
 		timer.cancel();
+	}
+	
+	private class RobotStatusUpdater extends TimerTask{
+
+		@Override
+		public void run() {
+			final RobotStatus robotStatus = inputManager.fetchInputs();
+			guiManager.update(robotStatus);
+			communicationManager.update(robotStatus);
+			System.out.println(robotStatus.toString());
+		}
+		
 	}
 }

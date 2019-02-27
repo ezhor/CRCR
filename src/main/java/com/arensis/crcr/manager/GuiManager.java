@@ -16,6 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class GuiManager {
+	private static final String BAR_CHART_RED_STYLE_PATH = "./style/bar-chart-red.css";
+	private static final String BAR_CHART_BLUE_STYLE_PATH = "./style/bar-chart-blue.css";
 	private Data<String, Number> leftMotorData;
 	private Data<String, Number> rightMotorData;
 
@@ -31,7 +33,7 @@ public class GuiManager {
 		primaryStage.setTitle("CRCR: Cool Remote Controlled Robot");
 		mainPane.add(createMotorsBarChart(), 0, 0);
 		mainPane.add(createArmBarChart(), 0, 1);
-		scene = new Scene(mainPane, 500, 500);
+		scene = new Scene(mainPane, 500, 500);		
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		// bc.setAnimated(false);
@@ -66,11 +68,14 @@ public class GuiManager {
 
 		this.leftMotorData = new Data<>("Left Motor", 0);
 		this.rightMotorData = new Data<>("Right Motor", 0);
+		
 		series.setName("Motors");
 		series.getData().addAll(leftMotorData, rightMotorData);
+		motorsBarChart.getData().addAll(series);
+		
+		motorsBarChart.getStylesheets().add(getClass().getClassLoader().getResource(BAR_CHART_RED_STYLE_PATH).toExternalForm());
 		yAxis.setAnimated(false);
 		xAxis.setAnimated(false);
-		motorsBarChart.getData().addAll(series);
 
 		return motorsBarChart;
 	}
@@ -80,7 +85,6 @@ public class GuiManager {
 		final NumberAxis yAxis = new NumberAxis(0, 180, 10);
 		final BarChart<String, Number> armBarChart = new BarChart<>(xAxis, yAxis);
 		final XYChart.Series<String, Number> series = new Series<>();
-		final String blueBarStyle = String.format("-fx-stroke: %s;", getRgbaColor(Color.BLUE));
 
 		this.shoulderRotationData = new Data<>("Shoulder Rotation", 0);
 		this.elbowRotationData = new Data<>("Elbow Rotation", 0);
@@ -88,11 +92,13 @@ public class GuiManager {
 		this.handRotationData = new Data<>("Hand Rotation", 0);
 		
 		series.setName("Arm");
-		series.getData().addAll(shoulderRotationData, elbowRotationData, wristRotationData, handRotationData);
+		series.getData().addAll(shoulderRotationData, elbowRotationData, wristRotationData, handRotationData);		
+		armBarChart.getData().addAll(series);
+		
+		armBarChart.getStylesheets().add(getClass().getClassLoader().getResource(BAR_CHART_BLUE_STYLE_PATH).toExternalForm());
 		yAxis.setAnimated(false);
 		xAxis.setAnimated(false);
-		armBarChart.getData().addAll(series);
-
+		
 		return armBarChart;
 	}
 
