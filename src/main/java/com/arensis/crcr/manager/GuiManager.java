@@ -15,6 +15,7 @@ import javafx.scene.chart.XYChart.Series;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+@SuppressWarnings("restriction")
 public class GuiManager {
 	private static final String BAR_CHART_RED_STYLE_PATH = "./style/bar-chart-red.css";
 	private static final String BAR_CHART_BLUE_STYLE_PATH = "./style/bar-chart-blue.css";

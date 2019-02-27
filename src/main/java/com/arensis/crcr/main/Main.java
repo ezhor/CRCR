@@ -11,6 +11,7 @@ import com.arensis.crcr.model.RobotStatus;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+@SuppressWarnings("restriction")
 public class Main extends Application {
 	private static final int UPDATE_TIME = 500;
 	private final GuiManager guiManager = new GuiManager();
@@ -27,6 +28,7 @@ public class Main extends Application {
 		RobotStatus currentStatus = communicationManager.getCurrentStatus();
 		guiManager.start(primaryStage);
 		guiManager.update(currentStatus);
+		inputManager.setRobotStatus(currentStatus);
 		startUpdateThread();
 	}
 

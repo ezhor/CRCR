@@ -56,3 +56,8 @@ unsigned int RobotStatus::getHandRotation() {
 void RobotStatus::setHandRotation(unsigned int handRotation) {
 	this->handRotation = handRotation;
 }
+
+std:string toString(){
+	std::stringstream stringStream;
+	stringStream << 
+}

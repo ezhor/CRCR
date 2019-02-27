@@ -1,6 +1,9 @@
 #ifndef ROBOTSTATUS_H_
 #define ROBOTSTATUS_H_
 
+#include <string>
+#include <sstream>
+
 class RobotStatus {
 private:
 	unsigned int leftMotorPower;
@@ -30,6 +33,8 @@ public:
 	
 	unsigned int getHandRotation();
 	void setHandRotation(unsigned int handRotation);
+	
+	sdt:string toString();
 };
 
 #endif /* ROBOTSTATUS_H__H_ */
