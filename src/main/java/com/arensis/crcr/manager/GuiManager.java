@@ -37,7 +37,6 @@ public class GuiManager {
 		scene = new Scene(mainPane, 500, 500);		
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		// bc.setAnimated(false);
 	}
 
 	public void update(RobotStatus robotStatus) {
@@ -63,7 +62,7 @@ public class GuiManager {
 
 	private BarChart<String, Number> createMotorsBarChart() {
 		final CategoryAxis xAxis = new CategoryAxis();
-		final NumberAxis yAxis = new NumberAxis(0, 100, 10);
+		final NumberAxis yAxis = new NumberAxis(-100, 100, 10);
 		final BarChart<String, Number> motorsBarChart = new BarChart<>(xAxis, yAxis);
 		final XYChart.Series<String, Number> series = new Series<>();
 
@@ -78,6 +77,7 @@ public class GuiManager {
 		motorsBarChart.autosize();
 		yAxis.setAnimated(false);
 		xAxis.setAnimated(false);
+		motorsBarChart.setAnimated(false);
 
 		return motorsBarChart;
 	}

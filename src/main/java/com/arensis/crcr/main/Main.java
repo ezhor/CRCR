@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 @SuppressWarnings("restriction")
 public class Main extends Application {
-	private static final int UPDATE_TIME = 500;
+	private static final int UPDATE_TIME = 50;
 	private final GuiManager guiManager = new GuiManager();
 	private final InputManager inputManager = new InputManager();
 	private final CommunicationManager communicationManager = new CommunicationManager();

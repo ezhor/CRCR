@@ -21,8 +21,8 @@
 
 	<repositories>
 		<repository>
-			<id>jitpack.io</id>           <!-- JitPack allows github repo to be used as a maven repo -->
-			<url>https://jitpack.io</url> <!-- For documentation: http://jitpack.io/ -->
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
 		</repository>
 	</repositories>
 
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>com.github.strikerx3</groupId>
 			<artifactId>jxinput</artifactId>
-			<version>1.0.0</version>    <!-- Use any released version, commit hash or branch-SNAPSHOT here -->
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
