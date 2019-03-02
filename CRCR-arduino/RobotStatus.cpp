@@ -1,81 +1,85 @@
 #include "./RobotStatus.h"
 
 RobotStatus::RobotStatus() {
-}
-
-RobotStatus::RobotStatus(String serializedStatus) {
+  this->leftMotorPower = 0;
+  this->rightMotorPower = 0;
+  this->shoulderRotation = 0;
+  this->elbowRotation = 0;
+  this->wristRotation = 0;
+  this->handRotation = 0;
+  this->soundEvent = 0;
 }
 
 RobotStatus::~RobotStatus() {
 }
 
-unsigned int RobotStatus::getLeftMotorPower(){
+int RobotStatus::getLeftMotorPower(){
 	return this->leftMotorPower;
 }
 
-void RobotStatus::setLeftMotorPower(unsigned int leftMotorPower){
+void RobotStatus::setLeftMotorPower(int leftMotorPower){
 	this->leftMotorPower = leftMotorPower;
 }
 
-unsigned int RobotStatus::getRightMotorPower(){
+int RobotStatus::getRightMotorPower(){
 	return this->rightMotorPower;
 }
 
-void RobotStatus::setRightMotorPower(unsigned int rightMotorPower) {
+void RobotStatus::setRightMotorPower(int rightMotorPower) {
 	this->rightMotorPower = rightMotorPower;
 }
 
-unsigned int RobotStatus::getShoulderRotation() {
+int RobotStatus::getShoulderRotation() {
 	return this->shoulderRotation;
 }
 
-void RobotStatus::setShoulderRotation(unsigned int shoulderRotation) {
+void RobotStatus::setShoulderRotation(int shoulderRotation) {
 	this->shoulderRotation = shoulderRotation;
 }
 
-unsigned int RobotStatus::getElbowRotation() {
+int RobotStatus::getElbowRotation() {
 	return this->elbowRotation;
 }
 
-void RobotStatus::setElbowRotation(unsigned int elbowRotation) {
+void RobotStatus::setElbowRotation(int elbowRotation) {
 	this->elbowRotation = elbowRotation;
 }
 
-unsigned int RobotStatus::getWristRotation() {
+int RobotStatus::getWristRotation() {
 	return this->wristRotation;
 }
 
-void RobotStatus::setWristRotation(unsigned int wristRotation) {
+void RobotStatus::setWristRotation(int wristRotation) {
 	this->wristRotation = wristRotation;
 }
 
-unsigned int RobotStatus::getHandRotation() {
+int RobotStatus::getHandRotation() {
 	return this->handRotation;
 }
 
-void RobotStatus::setHandRotation(unsigned int handRotation) {
+void RobotStatus::setHandRotation(int handRotation) {
 	this->handRotation = handRotation;
 }
 
-unsigned short int RobotStatus::getSoundEvent() {
+int RobotStatus::getSoundEvent() {
 	return this->soundEvent;
 }
 
-void RobotStatus::setSoundEvent(unsigned short int soundEvent) {
+void RobotStatus::setSoundEvent(int soundEvent) {
 	this->soundEvent = soundEvent;
 }
 
 
 
 String RobotStatus::toString(){
-	String status = String();
+	String status;
 	
-	status = "leftMotorPower=" + this->leftMotorPower;
-	status += ";rightMotorPower=" + this->rightMotorPower;
-	status += ";shoulderRotation=" + this->shoulderRotation;
-	status += ";elbowRotation=" + this->elbowRotation;
-	status += ";wristRotation=" + this->wristRotation;
-	status += ";handRotation=" + this->handRotation;
+	status = String("leftMotorPower=") + this->leftMotorPower;
+	status += String(";rightMotorPower=") + this->rightMotorPower;
+	status += String(";shoulderRotation=") + this->shoulderRotation;
+	status += String(";elbowRotation=") + this->elbowRotation;
+	status += String(";wristRotation=") + this->wristRotation;
+	status += String(";handRotation=") + this->handRotation;
 
 	return status;
 }

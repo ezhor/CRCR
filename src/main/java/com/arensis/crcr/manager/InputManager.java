@@ -20,6 +20,7 @@ public class InputManager {
 				device = XInputDevice.getDeviceFor(0);
 				if(device.poll()){
 					calculateMotorsPower(device.getComponents().getAxes());
+					calculateArmPosition();
 				}
 			} catch (XInputNotLoadedException e) {
 				e.printStackTrace();
@@ -44,6 +45,11 @@ public class InputManager {
 		}else{
             calculateInPlaceRotation(lxNormalized);
 		}
+	}
+
+	//TODO
+	private void calculateArmPosition(){
+
 	}
 
 	private void calculateForwardMovement(int rtNormalized, int lxNormalized) {

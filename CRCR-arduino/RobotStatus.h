@@ -5,38 +5,37 @@
 
 class RobotStatus {
 private:
-	signed int leftMotorPower;
-	signed int rightMotorPower;
-	unsigned int shoulderRotation;
-	unsigned int elbowRotation;
-	unsigned int wristRotation;
-	unsigned int handRotation;
-	unsigned short int soundEvent;
+	int leftMotorPower;
+	int rightMotorPower;
+	int shoulderRotation;
+	int elbowRotation;
+	int wristRotation;
+	int handRotation;
+	int soundEvent;
 public:
 	RobotStatus();
-	RobotStatus(String serializedStatus);
 	~RobotStatus();
 
-	unsigned int getLeftMotorPower();
-	void setLeftMotorPower(unsigned int leftMotorPower);
+	int getLeftMotorPower();
+	void setLeftMotorPower(int leftMotorPower);
 	
-	unsigned int getRightMotorPower();
-	void setRightMotorPower(unsigned int rightMotorPower);
+	int getRightMotorPower();
+	void setRightMotorPower(int rightMotorPower);
 	
-	unsigned int getShoulderRotation();
-	void setShoulderRotation(unsigned int shoulderRotation);
+	int getShoulderRotation();
+	void setShoulderRotation(int shoulderRotation);
 	
-	unsigned int getElbowRotation();
-	void setElbowRotation(unsigned int elbowRotation);
+	int getElbowRotation();
+	void setElbowRotation(int elbowRotation);
 	
-	unsigned int getWristRotation();
-	void setWristRotation(unsigned int wristRotation);
+	int getWristRotation();
+	void setWristRotation(int wristRotation);
 	
-	unsigned int getHandRotation();
-	void setHandRotation(unsigned int handRotation);
+	int getHandRotation();
+	void setHandRotation(int handRotation);
 
-	unsigned short int getSoundEvent();
-	void setSoundEvent(unsigned short int soundEvent);
+	int getSoundEvent();
+	void setSoundEvent(int soundEvent);
 
 	String toString();
 };
