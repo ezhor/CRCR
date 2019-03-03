@@ -73,7 +73,7 @@ public class GuiManager {
 		series.getData().addAll(leftMotorData, rightMotorData);
 		motorsBarChart.getData().addAll(series);
 		
-		motorsBarChart.getStylesheets().add(getClass().getClassLoader().getResource(BAR_CHART_RED_STYLE_PATH).toExternalForm());
+		motorsBarChart.getStylesheets().add(BAR_CHART_RED_STYLE_PATH);
 		motorsBarChart.autosize();
 		yAxis.setAnimated(false);
 		xAxis.setAnimated(false);
@@ -97,7 +97,7 @@ public class GuiManager {
 		series.getData().addAll(shoulderRotationData, elbowRotationData, wristRotationData, handRotationData);		
 		armBarChart.getData().addAll(series);
 		
-		armBarChart.getStylesheets().add(getClass().getClassLoader().getResource(BAR_CHART_BLUE_STYLE_PATH).toExternalForm());
+		armBarChart.getStylesheets().add(BAR_CHART_BLUE_STYLE_PATH);
 		yAxis.setAnimated(false);
 		xAxis.setAnimated(false);
 		

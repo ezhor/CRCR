@@ -13,7 +13,7 @@ import java.util.TimerTask;
 @SuppressWarnings("restriction")
 public class Main extends Application {
     private static final int UPDATE_TIME = 50;
-    private static final String CRCR_IP = "192.168.0.29";
+    private static final String CRCR_IP = "mirandaserver.ddns.net";
     private final GuiManager guiManager = new GuiManager();
     private final InputManager inputManager = new InputManager();
     private final CommunicationManager communicationManager = new CommunicationManager();

@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="CRCR">
+    <output-path>$PROJECT_DIR$/classes/artifacts/CRCR</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.arensis.crcr.main.Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="CRCR.jar">
+        <element id="module-output" name="CRCR" />
+      </element>
+      <element id="library" level="project" name="Maven: com.github.strikerx3:jxinput:1.0.0" />
+    </root>
+  </artifact>
+</component>
