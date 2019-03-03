@@ -1,4 +1,3 @@
-#include "ESP8266.h"
 #include "RobotStatus.h"
 
 #define BAUD_RATE_SERIAL 9600
@@ -19,10 +18,11 @@ void setup()  {
   Serial.begin(BAUD_RATE_SERIAL);
   Serial1.begin(BAUD_RATE_SERIAL1);
   pinMode(LED_BUILTIN, OUTPUT);
+  startServer();
 }
 void loop()  {
-   parseReceivedData();
-   updateMotorsPower();
+  parseReceivedData();
+  updateMotorsPower();
 }
 
 void mirrorSerial(){
@@ -61,7 +61,6 @@ void parseRobotStatus(String serializedRobotStatus){
   robotStatus->setWristRotation(findValueOfKey(serializedRobotStatus, WRIST_ROTATION_KEY));
   robotStatus->setHandRotation(findValueOfKey(serializedRobotStatus, HAND_ROTATION_KEY));
   robotStatus->setSoundEvent(findValueOfKey(serializedRobotStatus, SOUND_EVENT_KEY));
-  Serial.println(robotStatus->toString());
   }
 
 int findValueOfKey(String serializedRobotStatus, String key){
@@ -73,4 +72,11 @@ int findValueOfKey(String serializedRobotStatus, String key){
 
 void updateMotorsPower(){
   analogWrite(LED_BUILTIN, robotStatus->getLeftMotorPower()*255/100);
+  }
+
+void startServer(){
+  delay(1000);
+  Serial1.println("AT+CIPMUX=1");
+  delay(50);
+  Serial1.println("AT+CIPSERVER=1,2727");
   }

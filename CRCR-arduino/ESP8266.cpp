@@ -741,4 +741,3 @@ bool ESP8266::sATCIPSTO(uint32_t timeout)
     m_puart->println(timeout);
     return recvFind("OK");
 }
-
