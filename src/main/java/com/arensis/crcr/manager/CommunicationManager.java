@@ -43,6 +43,7 @@ public class CommunicationManager {
 	private void send(String string, String header){
 		try {
 			outputStream.write(header.concat("@").concat(string).concat("\n").getBytes());
+			System.out.println(string);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,28 +1,35 @@
 #include "RobotStatus.h"
+#include "Servo.h"
 
 #define BAUD_RATE_SERIAL 9600
 #define BAUD_RATE_SERIAL1 115200
+
 #define RSR "RSR"
 #define RS "RS"
 #define LEFT_MOTOR_POWER_KEY "leftMotorPower"
 #define RIGHT_MOTOR_POWER_KEY "rightMotorPower"
-#define SHOULDER_ROTATION_KEY "shoulderRotationwer"
+#define SHOULDER_ROTATION_KEY "shoulderRotation"
 #define ELBOW_ROTATION_KEY "elbowRotation"
 #define WRIST_ROTATION_KEY "wristRotation"
 #define HAND_ROTATION_KEY "handRotation"
 #define SOUND_EVENT_KEY "soundEventrPower"
 
+#define SHOULDER_PIN 9
+
 RobotStatus* robotStatus = new RobotStatus();
+Servo shoulder;
 
 void setup()  {
   Serial.begin(BAUD_RATE_SERIAL);
   Serial1.begin(BAUD_RATE_SERIAL1);
   pinMode(LED_BUILTIN, OUTPUT);
   startServer();
+  shoulder.attach(SHOULDER_PIN);
 }
 void loop()  {
   parseReceivedData();
-  updateMotorsPower();
+  updateMotorsAndArm();
+  //mirrorSerial();
 }
 
 void mirrorSerial(){
@@ -70,8 +77,9 @@ int findValueOfKey(String serializedRobotStatus, String key){
   return keySubstring.substring(0, endIndex).toInt();
   }
 
-void updateMotorsPower(){
+void updateMotorsAndArm(){
   analogWrite(LED_BUILTIN, robotStatus->getLeftMotorPower()*255/100);
+  shoulder.write(robotStatus->getShoulderRotation());
   }
 
 void startServer(){

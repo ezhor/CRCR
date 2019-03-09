@@ -7,6 +7,7 @@ import com.github.strikerx3.jxinput.exceptions.XInputNotLoadedException;
 
 public class InputManager {
     private static final int LX_DEAD_ZONE = 20;
+	private static final int LY_DEAD_ZONE = 2;
 	private RobotStatus robotStatus;
 
 	public void setRobotStatus(RobotStatus robotStatus) {
@@ -20,7 +21,7 @@ public class InputManager {
 				device = XInputDevice.getDeviceFor(0);
 				if(device.poll()){
 					calculateMotorsPower(device.getComponents().getAxes());
-					calculateArmPosition();
+					calculateArmPosition(device.getComponents().getAxes());
 				}
 			} catch (XInputNotLoadedException e) {
 				e.printStackTrace();
@@ -45,11 +46,6 @@ public class InputManager {
 		}else{
             calculateInPlaceRotation(lxNormalized);
 		}
-	}
-
-	//TODO
-	private void calculateArmPosition(){
-
 	}
 
 	private void calculateForwardMovement(int rtNormalized, int lxNormalized) {
@@ -85,6 +81,20 @@ public class InputManager {
 	private void calculateInPlaceRotation(int lxNormalized) {
 		robotStatus.setLeftMotorPower(lxNormalized);
 		robotStatus.setRightMotorPower(-lxNormalized);
+	}
+
+	private void calculateArmPosition(XInputAxes axes){
+		int lyNormalized = Math.round(axes.ly*10);
+		int value;
+
+		if(lyNormalized < LY_DEAD_ZONE && lyNormalized > -LY_DEAD_ZONE){
+			lyNormalized = 0;
+		}
+
+		value = robotStatus.getShoulderRotation()+lyNormalized;
+		value = value < 0 ? 0 : value > 180 ? 180 : value;
+
+		robotStatus.setShoulderRotation(value);
 	}
 
 }

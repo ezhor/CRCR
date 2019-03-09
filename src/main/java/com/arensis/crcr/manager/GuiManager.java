@@ -75,8 +75,6 @@ public class GuiManager {
 		
 		motorsBarChart.getStylesheets().add(BAR_CHART_RED_STYLE_PATH);
 		motorsBarChart.autosize();
-		yAxis.setAnimated(false);
-		xAxis.setAnimated(false);
 		motorsBarChart.setAnimated(false);
 
 		return motorsBarChart;
@@ -98,8 +96,7 @@ public class GuiManager {
 		armBarChart.getData().addAll(series);
 		
 		armBarChart.getStylesheets().add(BAR_CHART_BLUE_STYLE_PATH);
-		yAxis.setAnimated(false);
-		xAxis.setAnimated(false);
+		armBarChart.setAnimated(false);
 		
 		return armBarChart;
 	}
