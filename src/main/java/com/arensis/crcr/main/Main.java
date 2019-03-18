@@ -27,9 +27,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         communicationManager.connect(CRCR_IP);
         RobotStatus currentStatus = communicationManager.fetchCurrentStatus();
-        guiManager.start(primaryStage);
-        guiManager.update(currentStatus);
         inputManager.setRobotStatus(currentStatus);
+        guiManager.start(primaryStage, inputManager);
+        guiManager.update(currentStatus);
         startUpdateThread();
     }
 

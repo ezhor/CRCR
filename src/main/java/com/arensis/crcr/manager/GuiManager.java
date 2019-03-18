@@ -1,8 +1,7 @@
 package com.arensis.crcr.manager;
 
+import com.arensis.crcr.model.KeyboardInput;
 import com.arensis.crcr.model.RobotStatus;
-import com.sun.prism.paint.Color;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,22 +18,25 @@ import javafx.stage.Stage;
 public class GuiManager {
 	private static final String BAR_CHART_RED_STYLE_PATH = "./style/bar-chart-red.css";
 	private static final String BAR_CHART_BLUE_STYLE_PATH = "./style/bar-chart-blue.css";
+
 	private Data<String, Number> leftMotorData;
 	private Data<String, Number> rightMotorData;
-
 	private Data<String, Number> shoulderRotationData;
 	private Data<String, Number> elbowRotationData;
 	private Data<String, Number> wristRotationData;
 	private Data<String, Number> handRotationData;
 
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage, InputManager inputManager) {
 		final Scene scene;
 		final GridPane mainPane = createMainGridPane();
 
 		primaryStage.setTitle("CRCR: Cool Remote Controlled Robot");
 		mainPane.add(createMotorsBarChart(), 0, 0);
 		mainPane.add(createArmBarChart(), 0, 1);
-		scene = new Scene(mainPane, 500, 500);		
+		scene = new Scene(mainPane, 500, 500);
+		scene.setOnKeyPressed(inputManager);
+		scene.setOnKeyReleased(inputManager);
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -99,9 +101,5 @@ public class GuiManager {
 		armBarChart.setAnimated(false);
 		
 		return armBarChart;
-	}
-
-	private String getRgbaColor(Color color) {
-		return String.format("rgba(%f, %f, %f, 1.0)", color.getRed(), color.getGreen(), color.getBlue());
 	}
 }

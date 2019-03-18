@@ -14,7 +14,9 @@
 #define HAND_ROTATION_KEY "handRotation"
 #define SOUND_EVENT_KEY "soundEventrPower"
 
-#define SHOULDER_PIN 9
+#define SHOULDER_PIN 13
+#define LEFT_MOTOR_PIN_FORWARD 9
+#define LEFT_MOTOR_PIN_BACKWARDS 6
 
 RobotStatus* robotStatus = new RobotStatus();
 Servo shoulder;
@@ -78,7 +80,11 @@ int findValueOfKey(String serializedRobotStatus, String key){
   }
 
 void updateMotorsAndArm(){
-  analogWrite(LED_BUILTIN, robotStatus->getLeftMotorPower()*255/100);
+  if(robotStatus->getLeftMotorPower() > 0){
+      analogWrite(LEFT_MOTOR_PIN_FORWARD, robotStatus->getLeftMotorPower()*255/100);
+    }else{
+      analogWrite(LEFT_MOTOR_PIN_BACKWARDS, robotStatus->getLeftMotorPower()*(-255)/100);
+    }  
   shoulder.write(robotStatus->getShoulderRotation());
   }
 
