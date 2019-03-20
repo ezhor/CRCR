@@ -15,8 +15,12 @@
 #define SOUND_EVENT_KEY "soundEventrPower"
 
 #define SHOULDER_PIN 13
-#define LEFT_MOTOR_PIN_FORWARD 9
-#define LEFT_MOTOR_PIN_BACKWARDS 6
+#define LEFT_MOTOR_PIN_POWER 3
+#define LEFT_MOTOR_PIN_FORWARD 2
+#define LEFT_MOTOR_PIN_BACKWARDS 4
+#define RIGHT_MOTOR_PIN_POWER 6
+#define RIGHT_MOTOR_PIN_FORWARD 8
+#define RIGHT_MOTOR_PIN_BACKWARDS 7
 
 RobotStatus* robotStatus = new RobotStatus();
 Servo shoulder;
@@ -24,7 +28,12 @@ Servo shoulder;
 void setup()  {
   Serial.begin(BAUD_RATE_SERIAL);
   Serial1.begin(BAUD_RATE_SERIAL1);
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LEFT_MOTOR_PIN_FORWARD, OUTPUT);
+  pinMode(LEFT_MOTOR_PIN_BACKWARDS, OUTPUT);
+  pinMode(LEFT_MOTOR_PIN_POWER, OUTPUT);
+  pinMode(RIGHT_MOTOR_PIN_FORWARD, OUTPUT);
+  pinMode(RIGHT_MOTOR_PIN_BACKWARDS, OUTPUT);
+  pinMode(RIGHT_MOTOR_PIN_POWER, OUTPUT);
   startServer();
   shoulder.attach(SHOULDER_PIN);
 }
@@ -80,12 +89,25 @@ int findValueOfKey(String serializedRobotStatus, String key){
   }
 
 void updateMotorsAndArm(){
-  if(robotStatus->getLeftMotorPower() > 0){
-      analogWrite(LEFT_MOTOR_PIN_FORWARD, robotStatus->getLeftMotorPower()*255/100);
-    }else{
-      analogWrite(LEFT_MOTOR_PIN_BACKWARDS, robotStatus->getLeftMotorPower()*(-255)/100);
-    }  
+  updateSingleMotorPower(LEFT_MOTOR_PIN_FORWARD, LEFT_MOTOR_PIN_BACKWARDS, LEFT_MOTOR_PIN_POWER, robotStatus->getLeftMotorPower());
+  updateSingleMotorPower(RIGHT_MOTOR_PIN_FORWARD, RIGHT_MOTOR_PIN_BACKWARDS, RIGHT_MOTOR_PIN_POWER, robotStatus->getRightMotorPower());
   shoulder.write(robotStatus->getShoulderRotation());
+  }
+
+void updateSingleMotorPower(int forwardPin, int backwardsPin, int powerPin, int power){
+    if(power > 0){
+      digitalWrite(forwardPin, HIGH);
+      digitalWrite(backwardsPin, LOW);
+      analogWrite(powerPin, power*255/100);
+    }else if(power < 0){
+      digitalWrite(forwardPin, LOW);
+      digitalWrite(backwardsPin, HIGH);
+      analogWrite(powerPin, power*(-255)/100);
+    }else{
+      digitalWrite(forwardPin, LOW);
+      digitalWrite(backwardsPin, LOW);
+      analogWrite(powerPin, 0);
+    }
   }
 
 void startServer(){
