@@ -43,7 +43,18 @@ public class InputManager implements EventHandler<KeyEvent> {
 				e.printStackTrace();
 			}
 		}
+
+		fixMotorsPower();
+
 		return robotStatus;
+	}
+
+	private void fixMotorsPower() {
+		int left = robotStatus.getLeftMotorPower();
+		int right = robotStatus.getRightMotorPower();
+
+		robotStatus.setRightMotorPower(right);
+		robotStatus.setLeftMotorPower(left);
 	}
 
 	private void calculateMotorsPowerFromGamepad(XInputAxes axes) {
